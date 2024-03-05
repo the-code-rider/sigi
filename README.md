@@ -1,3 +1,4 @@
+![Logo](https://raw.githubusercontent.com/the-code-rider/sigi/093d504a6852717ed5673bd3bf0d55e05f517374/logo.png)
 # SIGI: Simple Image Gen UI
 
 I primarily wrote this app because I wanted to generate a bunch of images using Stability AI without having to wait for the result.
@@ -27,6 +28,11 @@ If you are looking to run models locally, then you should take a look at [comfy 
      `touch .streamlit/secrets.toml`  
       edit the secrets.toml file  
         stability_api_key = 'add_key_here'
+
 ## Via Docker
 
 **ToDo: setup docker** 
+
+## Demo
+
+![Demo](https://github.com/the-code-rider/sigi/raw/093d504a6852717ed5673bd3bf0d55e05f517374/demo.mp4)
