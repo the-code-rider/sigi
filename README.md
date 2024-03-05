@@ -38,6 +38,13 @@ If you are looking to run models locally, then you should take a look at [comfy 
 2. Run   : provide your stability api key
 `docker run -p 8501:8501 -v sigi-data:/usr/src/app/ -e STABILITY_API_KEY=add_key_here sigi`
 
+The app will be accessible at : localhost:8501.
+
+*Alternatively* 
+You can download the image from 
+
+
+
 
 
 ## Demo  

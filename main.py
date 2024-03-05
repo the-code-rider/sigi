@@ -19,7 +19,5 @@ def main():
 
 
 if __name__ == '__main__':
-    import os
-    print(os.getenv('STABILITY_API_KEY'))
     setup_db()
     main()
