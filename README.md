@@ -1,4 +1,5 @@
-![Logo](https://raw.githubusercontent.com/the-code-rider/sigi/093d504a6852717ed5673bd3bf0d55e05f517374/logo.png)
+<img src="https://raw.githubusercontent.com/the-code-rider/sigi/main/logo.png" alt="drawing" width="200"/>
+
 # SIGI: Simple Image Gen UI
 
 I primarily wrote this app because I wanted to generate a bunch of images using Stability AI without having to wait for the result.
@@ -33,6 +34,7 @@ If you are looking to run models locally, then you should take a look at [comfy 
 
 **ToDo: setup docker** 
 
-## Demo
+## Demo  
 
-![Demo](https://github.com/the-code-rider/sigi/raw/093d504a6852717ed5673bd3bf0d55e05f517374/demo.mp4)
+<video src="https://github.com/the-code-rider/sigi/raw/main/demo.mp4"></video>
+
