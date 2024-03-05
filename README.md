@@ -14,14 +14,12 @@ If you are looking to run models locally, then you should take a look at [comfy 
 1. Clone the repository
 2. Install requirements  
 `pip install -r requirements.txt`
-3. Launch the app   
-`streamlit run main.py`
-4. Setting up API credential  
+3. Setting up API credential  
     a. you can either set the environment variable STABILITY_API_KEY  
-    **Windows**  
+    **Windows**    
     `set STABILITY_API_KEY=add_key_here`   
     
-    **Linux and macOS** 
+    **Linux and macOS**   
     `export STABILITY_API_KEY=add_key_here`
 
      b. Or create a streamlit secrets files  
@@ -29,22 +27,25 @@ If you are looking to run models locally, then you should take a look at [comfy 
      `touch .streamlit/secrets.toml`  
       edit the secrets.toml file  
         stability_api_key = 'add_key_here'
+4.Launch the app   
+`streamlit run main.py`  
+ The app will be accessible at : localhost:8501.
+
+
 
 ## Via Docker
 
 1. Build the image   
 `docker build -t sigi .`
 
+*Alternatively* 
+You can download the image from docker hub  
+`docker pull lecaptain/sigi:latest`
+
 2. Run   : provide your stability api key
 `docker run -p 8501:8501 -v sigi-data:/usr/src/app/ -e STABILITY_API_KEY=add_key_here sigi`
 
 The app will be accessible at : localhost:8501.
-
-*Alternatively* 
-You can download the image from 
-
-
-
 
 
 ## Demo  
