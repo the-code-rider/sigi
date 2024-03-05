@@ -35,6 +35,7 @@ If you are looking to run models locally, then you should take a look at [comfy 
 **ToDo: setup docker** 
 
 ## Demo  
+https://github.com/the-code-rider/sigi/blob/main/demo.mp4
 
 <video src="https://github.com/the-code-rider/sigi/raw/main/demo.mp4"></video>
 
