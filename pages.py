@@ -4,8 +4,10 @@ import streamlit as st
 import os
 from stability_ai_client import StabilityClient
 from db_dml import DBDML
+from utils import *
 
 
+@st.cache_data
 def _load_secret():
     if st.secrets['stability_api_key']:
         return st.secrets['stability_api_key']
@@ -31,13 +33,12 @@ def generate_page():
     with b1:
         if st.button("Generate"):
             if user_input:
-
                 st.write("image gen queued for :", user_prompt)
                 db_dml.add_to_job_queue(prompt=user_prompt, status='TODO')
 
             # trigger the loop
             while True:
-                pending_jobs = db_dml.get_pending_jobs()
+                pending_jobs = db_dml.get_job_by_status('TODO')
                 if pending_jobs.empty:
                     break
                 for _, row in pending_jobs.iterrows():
@@ -48,25 +49,30 @@ def generate_page():
                         if image:
                             db_dml.update_job_status(job_id, 'COMPLETED')
                             db_dml.add_to_result(prompt=prompt, image=image)
+                        else:
+                            db_dml.update_job_status(job_id, 'FAILED')
 
                     except Exception as e:
                         print(e)
                         db_dml.update_job_status(job_id, 'FAILED')
 
-            # import time
-            # time.sleep(40)
-            # st.write('just woke up')
+
+@st.cache_data
+def display_pictures(images_df):
+    for _, row in images_df.iterrows():
+        image_str = row['image']
+        try:
+            image = base64_to_image(image_str)
+            st.image(image, caption=f'{row["prompt"]} @ {row["timestamp"]}')
+        except Exception as e:
+            print(e)
 
 
 def browse_pictures_page():
-    st.title("Browse Pictures")
-    # Example images and texts. In a real app, these would come from your database or an API
-    images = ["image1.png", "image2.png", "image3.png"]  # Example image paths
-    texts = ["Image 1", "Image 2", "Image 3"]  # Example texts associated with the images
 
-    for i, img in enumerate(images):
-        st.image(img, caption=texts[i])
-
+    images_df = db_dml.get_images()
+    images_df_sorted = images_df.sort_values(by='timestamp', ascending=False)
+    display_pictures(images_df_sorted)
 
 # Define a function for the Job List page
 def job_list_page():
@@ -77,7 +83,3 @@ def job_list_page():
     if st.button('View Pending Jobs'):
         pending_jobs = db_dml.get_job_by_status(status='TODO')
         st.dataframe(pending_jobs)
-    # Example job list. In a real app, this would come from your database
-    jobs = ["Job 1", "Job 2", "Job 3"]
-    for job in jobs:
-        st.write(job)

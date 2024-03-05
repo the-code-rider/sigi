@@ -47,13 +47,15 @@ class StabilityClient:
             return None
 
         data = response.json()
+        # print(data)
 
         # since we are only generating one image for now
-        image_base64 = data["artifacts"][0]['image']
+        image_base64 = data["artifacts"][0]['base64']
+        print(image_base64)
         return image_base64
 
 
 
-
+# if __name__ == ''
 
 

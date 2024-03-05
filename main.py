@@ -1,7 +1,11 @@
 from pages import *
+from db_ddl import execute
 
-
+@st.cache_resource
+def setup_db():
+    execute()
 def main():
+
     st.sidebar.title("Navigation")
     page = st.sidebar.radio("Go to", ("Generate", "Browse Pictures", "Job List"))
 
@@ -15,4 +19,5 @@ def main():
 
 
 if __name__ == '__main__':
+    setup_db()
     main()
