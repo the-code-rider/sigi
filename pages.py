@@ -6,13 +6,13 @@ from stability_ai_client import StabilityClient
 from db_dml import DBDML
 from utils import *
 
-
 @st.cache_data
 def _load_secret():
+    if os.getenv('STABILITY_API_KEY'):
+        print("secret key found")
+        return os.getenv('STABILITY_API_KEY')
     if st.secrets['stability_api_key']:
         return st.secrets['stability_api_key']
-    if os.getenv('STABILITY_API_KEY'):
-        return os.getenv('STABILITY_API_KEY')
 
     raise Exception('Stability API Key Not Found')
 
@@ -65,14 +65,18 @@ def display_pictures(images_df):
             image = base64_to_image(image_str)
             st.image(image, caption=f'{row["prompt"]} @ {row["timestamp"]}')
         except Exception as e:
+            print('failed to convert image')
             print(e)
 
 
 def browse_pictures_page():
-
     images_df = db_dml.get_images()
     images_df_sorted = images_df.sort_values(by='timestamp', ascending=False)
     display_pictures(images_df_sorted)
+
+    if (st.button('Show Table Entries')):
+        st.dataframe(images_df_sorted)
+
 
 # Define a function for the Job List page
 def job_list_page():

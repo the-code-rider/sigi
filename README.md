@@ -32,7 +32,13 @@ If you are looking to run models locally, then you should take a look at [comfy 
 
 ## Via Docker
 
-**ToDo: setup docker** 
+1. Build the image   
+`docker build -t sigi .`
+
+2. Run   : provide your stability api key
+`docker run -p 8501:8501 -v sigi-data:/usr/src/app/ -e STABILITY_API_KEY=add_key_here sigi`
+
+
 
 ## Demo  
 

@@ -51,7 +51,7 @@ class StabilityClient:
 
         # since we are only generating one image for now
         image_base64 = data["artifacts"][0]['base64']
-        print(image_base64)
+        # print(image_base64)
         return image_base64
 
 
